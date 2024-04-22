@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 chmod +x wsgi_entrypoint.sh
-
+chown -R wsgi:wsgi .
 
 until cd /home/wsgi/backend/
 do
