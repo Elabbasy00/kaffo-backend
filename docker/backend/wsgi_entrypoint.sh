@@ -8,7 +8,7 @@ do
     echo "Waiting for server volume..."
 done
 
-until python3 ./manage.py migrate 
+until python3 manage.py migrate 
 do
     echo "Waiting for db to be ready..."
     sleep 2
@@ -20,7 +20,7 @@ done
 #     sleep 2
 # done
 
-python3 ./manage.py collectstatic --noinput
+python3 manage.py collectstatic --noinput
 
 chown -R wsgi:wsgi ./django_static
 
