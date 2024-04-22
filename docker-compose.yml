@@ -1,0 +1,119 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres:12.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=db_admin
+      - POSTGRES_PASSWORD=010202020aA##
+      - POSTGRES_DB=harashaDB
+    env_file:
+      - path: ./backend/.venv
+        required: true
+
+
+  backend:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./docker/backend/Dockerfile
+    entrypoint: /home/wsgi/docker/backend/wsgi_entrypoint.sh
+    volumes:
+      - static_volume:/home/wsgi/backend/server/django_static
+      - static_image:/home/wsgi/backend/server/media
+    expose:
+      - 8000
+    env_file:
+      - path: ./backend/.env
+        required: true
+
+    depends_on:
+      - db
+
+    links:
+      - db
+
+
+  # celery:
+  #   restart: unless-stopped
+  #   build:
+  #     context: .
+  #     dockerfile: ./docker/backend/Dockerfile_celery
+  #   entrypoint: /home/celery/docker/backend/celery-entrypoint.sh
+  #   environment:
+  #     - SECRET_KEY=tv==u93r#vx(-f6xtt3&+npkjdl_h=zz6hgenha@_p=2s!!1fc
+  #     - CELERY_BROKER_URL=redis://cere:6380/0
+  #     - CELERY_RESULT_BACKEND=redis://cere:6380/0
+  #     - PROTOCOL=https
+  #     - DOMAIN=alsharakagroup.com
+
+  #     - POSTGRES_DB=bottool
+  #     - POSTGRES_USER=db_admin
+  #     - POSTGRES_PASSWORD=010202020aA##
+
+  #     - POSTGRES_USER_PORTAL=db_portal
+  #     - POSTGRES_PASSWORD_PORTAL=010202020aA##
+  #     - POSTGRES_DB_PORTAL=portalDB
+  #   depends_on:
+  #     - backend
+  #     - asgiserver
+  #     - cere
+  #   links:
+  #     - db
+  #     - cere
+  #     # - db_Portal
+
+  nginx:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - static_volume:/app/backend/server/django_static/
+      - static_image:/app/backend/server/media
+      - ./docker/nginx/certbot/conf:/etc/letsencrypt
+      - ./docker/nginx/certbot/www:/var/www/certbot
+
+    depends_on:
+      - backend
+
+  certbot:
+    image: certbot/certbot
+    restart: unless-stopped
+    volumes:
+      - ./docker/nginx/certbot/conf:/etc/letsencrypt
+      - ./docker/nginx/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+  pgbackups:
+    container_name: Backup
+    image: prodrigestivill/postgres-backup-local
+    restart: always
+    volumes:
+      - ./backup:/backups
+    links:
+      - db:db
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_DB=kaffoDB
+      - POSTGRES_USER=db_admin
+      - POSTGRES_PASSWORD=010202020aA##
+      - POSTGRES_EXTRA_OPTS=-Z9 --schema=public --blobs
+      - SCHEDULE=@monthly
+      - BACKUP_KEEP_DAYS=7
+      - BACKUP_KEEP_WEEKS=4
+      - BACKUP_KEEP_MONTHS=6
+      - HEALTHCHECK_PORT=81
+
+volumes:
+  static_volume: {}
+  static_image: {}
+  postgres_data:
+  # postgres_portal:
