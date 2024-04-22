@@ -10,7 +10,7 @@ services:
       - POSTGRES_PASSWORD=010202020aA##
       - POSTGRES_DB=harashaDB
     env_file:
-      - path: ./backend/.venv
+      - path: ./backend/.env
         required: true
 
 
