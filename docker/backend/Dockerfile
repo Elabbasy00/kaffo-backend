@@ -21,6 +21,4 @@ RUN pip3 install -r backend/requirements/base.txt
 ADD --chown=wsgi:wsgi ./backend /home/wsgi/backend
 ADD --chown=wsgi:wsgi ./docker /home/wsgi/docker
 
-
-
-# RUN chmod +x /app/docker/backend/asgi.entrypoint.sh
+RUN chmod +x /home/wsgi/docker/backend/wsgi.entrypoint.sh
