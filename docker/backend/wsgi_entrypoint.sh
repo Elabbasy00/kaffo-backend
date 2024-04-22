@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# chmod +x wsgi_entrypoint.sh
+chmod +x wsgi_entrypoint.sh
 
 
 until cd /home/wsgi/backend/
