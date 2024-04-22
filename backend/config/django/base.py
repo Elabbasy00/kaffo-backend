@@ -107,6 +107,7 @@ USE_TZ = True
 
 
 STATIC_URL = "/django_static/"
+# d
 
 STATIC_ROOT = os.path.join(BASE_DIR, "django_static")
 
