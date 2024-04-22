@@ -20,7 +20,7 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 
 CORS_ALLOW_ALL_ORIGINS = False
 
-CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST", default=[])
+CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST", default=["https://backend.kaffo.co"])
 
 SESSION_COOKIE_SECURE = env.bool("SESSION_COOKIE_SECURE", default=True)
 
