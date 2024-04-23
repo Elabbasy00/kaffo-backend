@@ -19,13 +19,12 @@ services:
     build:
       context: .
       dockerfile: ./docker/backend/Dockerfile
-    entrypoint: /app/docker/backend/wsgi_entrypoint.sh
+    entrypoint: /home/wsgi/docker/backend/wsgi_entrypoint.sh
     volumes:
-      - static_volume:/app/backend/django_static
-      - static_image:/app/backend/media
+      - static_volume:/home/wsgi/backend/django_static
+      - static_image:/home/wsgi/backend/media
     expose:
       - 8000
-
     env_file:
       - path: ./backend/.env
         required: true
