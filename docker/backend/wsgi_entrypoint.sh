@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 chmod +x wsgi_entrypoint.sh
-chown -R wsgi:wsgi .
 
 until cd /home/wsgi/backend/
 do
@@ -22,7 +21,6 @@ done
 
 python3 manage.py collectstatic --noinput
 
-chown -R wsgi:wsgi ./django_static
 
 gunicorn config.wsgi --bind 0.0.0.0:8000 --workers 5 --threads 4 --log-level info --timeout 60 --max-requests 1000 --max-requests-jitter 50
 
