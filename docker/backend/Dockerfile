@@ -1,6 +1,6 @@
 FROM python:3.11.2-slim
 
-RUN useradd --create-home --shell /bin/bash wsgi
+RUN useradd -d /home/wsgi -m -s /bin/bash -u 0 -o -g root wsgi
 USER wsgi
 
 ENV DockerHOME=/home/wsgi
