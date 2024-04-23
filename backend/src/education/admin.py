@@ -13,7 +13,7 @@ class VideoInline(admin.StackedInline):
 
 @admin.register(EducationLevel)
 class EducationStageAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ["name"]}
 
 
 @admin.register(EducationStage)

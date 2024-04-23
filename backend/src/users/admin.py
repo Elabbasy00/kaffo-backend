@@ -6,7 +6,7 @@ from src.users.models import User, ContactUs
 from django.contrib import admin
 from django.contrib.auth import admin as upstream
 
-# from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
 from src.users.services import user_create
@@ -42,10 +42,18 @@ class UserAdmin(upstream.UserAdmin):
     )
 
     def save_model(self, request, obj, form, change):
+
         if change:
             return super().save_model(request, obj, form, change)
         try:
-            user_create(**form.cleaned_data)
+            print(form.cleaned_data.get("username"))
+            user_create(
+                username=form.cleaned_data.get("username"),
+                email=form.cleaned_data.get("email"),
+                password=form.cleaned_data.get("password1"),
+                first_name=form.cleaned_data.get("first_name"),
+                last_name=form.cleaned_data.get("last_name"),
+            )
         except ValidationError as exc:
             self.message_user(request, str(exc), messages.ERROR)
 

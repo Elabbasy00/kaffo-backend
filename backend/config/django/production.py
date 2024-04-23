@@ -16,11 +16,11 @@ DEBUG = env.bool("DJANGO_DEBUG", default=False)
 
 SECRET_KEY = env("SECRET_KEY")
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["backend.kaffo.co"])
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["backend.kaffo.co", "kaffo.co"])
 
 CORS_ALLOW_ALL_ORIGINS = False
 
-CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST", default=["https://backend.kaffo.co"])
+CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST", default=["https://backend.kaffo.co", "https://kaffo.co"])
 
 SESSION_COOKIE_SECURE = env.bool("SESSION_COOKIE_SECURE", default=True)
 
