@@ -16,7 +16,7 @@ DEBUG = env.bool("DJANGO_DEBUG", default=False)
 
 SECRET_KEY = env("SECRET_KEY")
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["backend.kaffo.co"])
 
 CORS_ALLOW_ALL_ORIGINS = False
 
