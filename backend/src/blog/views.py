@@ -1,6 +1,7 @@
 from src.api.pagination import LimitOffsetPagination, get_paginated_response
 from rest_framework import views, status, response, serializers
 from src.blog.selector import BlogRepository
+from src.api.serializers import FixAbsolutePathSerializer
 
 
 class GetPostsViews(views.APIView):
@@ -12,7 +13,7 @@ class GetPostsViews(views.APIView):
         cover = serializers.ImageField()
         overview = serializers.CharField()
         created_at = serializers.DateTimeField()
-        content = serializers.CharField()
+        content = FixAbsolutePathSerializer()
         slug = serializers.SlugField(allow_unicode=True)
 
     def get(self, request):
@@ -36,7 +37,7 @@ class GetSinglePostView(views.APIView):
         cover = serializers.ImageField()
         overview = serializers.CharField()
         created_at = serializers.DateTimeField()
-        content = serializers.CharField()
+        content = FixAbsolutePathSerializer()
         slug = serializers.SlugField(allow_unicode=True)
 
     def get(self, request):

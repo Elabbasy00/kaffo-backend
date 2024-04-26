@@ -2,7 +2,7 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 
 
 def get_filename(filename, request):
-    return filename.upper()
+    return filename
 
 
 CKEDITOR_FILENAME_GENERATOR = "config.settings.ckeditor.get_filename"

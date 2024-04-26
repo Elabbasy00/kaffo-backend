@@ -24,6 +24,8 @@ CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST", default=["https://back
 
 SESSION_COOKIE_SECURE = env.bool("SESSION_COOKIE_SECURE", default=True)
 
+SITE_DOMAIN = env.str("DJANGO_BASE_BACKEND_URL", default="https://backend.kaffo.co")
+
 # https://docs.djangoproject.com/en/dev/ref/settings/#secure-proxy-ssl-header
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # https://docs.djangoproject.com/en/dev/ref/settings/#secure-ssl-redirect

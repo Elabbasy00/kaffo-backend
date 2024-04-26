@@ -7,7 +7,7 @@ DEBUG = env.bool("DJANGO_DEBUG", default=True)
 
 ALLOWED_HOSTS = ["*"]
 
-LOCAL_APPS = ["src.users", "src.common", "src.api", "src.tasks", "src.education", "src.blog"]
+LOCAL_APPS = ["src.users", "src.common", "src.api", "src.tasks", "src.education", "src.blog", "src.services"]
 
 THIRD_PARTY_APPS = [
     "rest_framework",
@@ -21,6 +21,7 @@ THIRD_PARTY_APPS = [
     "corsheaders",
     "rest_framework_simplejwt",
     "ckeditor",
+    "ckeditor_uploader",
 ]
 
 INSTALLED_APPS = [
@@ -138,6 +139,10 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "ahmedelabbasy5@gmail.com"
 EMAIL_HOST_PASSWORD = "dhnfoxmmmwtzdhxv"
+
+SITE_DOMAIN = env.str("DJANGO_BASE_BACKEND_URL", default="http://127.0.0.1:8000")
+
+REPLACE_WITH = 'src="%s/media/uploads/' % SITE_DOMAIN
 
 from config.settings.cors import *
 from config.settings.celery import *

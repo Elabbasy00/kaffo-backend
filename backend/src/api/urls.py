@@ -5,4 +5,5 @@ urlpatterns = [
     path("users/", include(("src.users.urls", "users"))),
     path("education/", include(("src.education.urls", "education"))),
     path("blog/", include(("src.blog.urls", "blog"))),
+    path("services/", include(("src.services.urls", "services"))),
 ]
