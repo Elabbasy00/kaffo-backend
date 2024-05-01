@@ -140,7 +140,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "ahmedelabbasy5@gmail.com"
 EMAIL_HOST_PASSWORD = "dhnfoxmmmwtzdhxv"
 
-SITE_DOMAIN = env.str("DJANGO_BASE_BACKEND_URL", default="http://127.0.0.1:8000")
+SITE_DOMAIN = env.str("SITE_DOMAIN", default="http://127.0.0.1:8000")
 
 REPLACE_WITH = 'src="%s/media/uploads/' % SITE_DOMAIN
 

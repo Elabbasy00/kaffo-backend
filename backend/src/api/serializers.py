@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.conf import settings
+from config.env import env
 
 SEARCH_PATTERN = 'src="/media/uploads/'
 
