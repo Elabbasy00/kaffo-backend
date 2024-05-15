@@ -26,4 +26,4 @@ class Project(models.Model):
 
 class ProjectGallery(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="gallery")
-    img = ResizedImageField(force_format="WEBP", quality=100, upload_to="services/projects/")
+    img = ResizedImageField(force_format="WEBP", size=[500, 500], quality=100, upload_to="services/projects/")
