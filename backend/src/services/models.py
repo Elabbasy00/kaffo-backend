@@ -17,7 +17,9 @@ class Service(models.Model):
 class Project(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name="project_for")
     title = models.CharField(max_length=100)
-    cover = ResizedImageField(force_format="WEBP", quality=100, upload_to="services/projects/", null=True, blank=True)
+    cover = ResizedImageField(
+        force_format="WEBP", size=[500, 500], quality=100, upload_to="services/projects/", null=True, blank=True
+    )
     overview = models.CharField(max_length=250, null=True, blank=True)
 
     def __str__(self):
