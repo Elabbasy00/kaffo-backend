@@ -19,7 +19,8 @@ class Project(models.Model):
     title = models.CharField(max_length=100)
     cover = ResizedImageField(
         force_format="WEBP",
-        quality=1,
+        quality=100,
+        size=[600, 400],
         upload_to="services/projects/",
         null=True,
         blank=True,
@@ -34,6 +35,7 @@ class ProjectGallery(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="gallery")
     img = ResizedImageField(
         force_format="WEBP",
-        quality=1,
+        quality=100,
+        size=[600, 400],
         upload_to="services/projects/",
     )
