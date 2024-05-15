@@ -18,7 +18,13 @@ class Project(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name="project_for")
     title = models.CharField(max_length=100)
     cover = ResizedImageField(
-        force_format="WEBP", size=[500, 500], quality=100, upload_to="services/projects/", null=True, blank=True
+        force_format="WEBP",
+        size=[500, 500],
+        quality=100,
+        upload_to="services/projects/",
+        null=True,
+        blank=True,
+        crop=["middle", "center"],
     )
     overview = models.CharField(max_length=250, null=True, blank=True)
 
@@ -28,4 +34,10 @@ class Project(models.Model):
 
 class ProjectGallery(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="gallery")
-    img = ResizedImageField(force_format="WEBP", size=[500, 500], quality=100, upload_to="services/projects/")
+    img = ResizedImageField(
+        force_format="WEBP",
+        size=[500, 500],
+        quality=100,
+        upload_to="services/projects/",
+        crop=["middle", "center"],
+    )
