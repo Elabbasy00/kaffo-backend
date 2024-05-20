@@ -144,6 +144,8 @@ SITE_DOMAIN = env.str("SITE_DOMAIN", default="http://127.0.0.1:8000")
 
 REPLACE_WITH = 'src="%s/media/uploads/' % SITE_DOMAIN
 
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
+
 from config.settings.cors import *
 from config.settings.celery import *
 from config.settings.files_and_storages import *
